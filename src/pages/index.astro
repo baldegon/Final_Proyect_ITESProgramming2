@@ -5,15 +5,21 @@ import HeroSection from '../components/HeroSection.astro';
 import LandingHeader from '../components/LandingHeader.astro';
 import CocktailCard from '../components/CocktailCard.astro';
 import ViewTransitions from 'astro/components/ViewTransitions.astro';
-import { supabase } from '../../public/supabase';
+import { supabase } from '../lib/supabase.js';
 
+interface Props {
+  allCocktails: any;
+}
 
-const { data, error } = await supabase
+let { data: cocktails, error } = await supabase
   .from('cocktails')
   .select('*')
+  console.log(cocktails, error)
 
-console.log(data, error)
+
+
 ---
+
 
 <Layout title="Que onda PA">
 	<LandingHeader />
