@@ -6,6 +6,6 @@ export const prerender = false;
 
 // https://astro.build/config
 export default defineConfig({
-  output: hybrid,
+  output: 'server',
   integrations: [tailwind()]
 });

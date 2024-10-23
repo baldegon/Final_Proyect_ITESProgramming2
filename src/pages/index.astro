@@ -3,10 +3,9 @@ import Layout from '../layouts/Layout.astro';
 import ChargeSection from '../components/ChargeSection.astro';
 import HeroSection from '../components/HeroSection.astro';
 import LandingHeader from '../components/LandingHeader.astro';
-import CocktailCard from '../components/CocktailCard.astro';
 import ViewTransitions from 'astro/components/ViewTransitions.astro';
 import { supabase } from '../lib/supabase.js';
-
+/*
 interface Props {
   allCocktails: any;
 }
@@ -15,7 +14,7 @@ let { data: cocktails, error } = await supabase
   .from('cocktails')
   .select('*')
   console.log(cocktails, error)
-
+*/
 
 
 ---
@@ -36,7 +35,6 @@ let { data: cocktails, error } = await supabase
 			<HeroSection />
 		</div>
 		<div class="flex flex-col">
-			<CocktailCard />
 		</div>
 	</main>
 </Layout>
