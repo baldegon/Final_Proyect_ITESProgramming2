@@ -6,7 +6,7 @@ module.exports = {
 	content: ['./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}'],
 	theme: {
 		fontFamily: {
-			sans: ['Roboto, Gotham SSm A, sans-serif'],
+			sans: ['Proxima Nova, Roboto, Gotham SSm A, sans-serif'],
 			
 		},
 		extend: {},
