@@ -1,4 +1,5 @@
 /** @type {import('tailwindcss').Config} */
+import defaultTheme from 'tailwindcss/defaultTheme'
 
 
 
@@ -6,7 +7,10 @@ module.exports = {
 	content: ['./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}'],
 	theme: {
 		fontFamily: {
-			sans: ['Proxima Nova, Roboto, Gotham SSm A, sans-serif'],
+			'display': ['Arvo, Lato'],
+			sans: ['Lato', ...defaultTheme.fontFamily.sans],
+			serif: ['Arvo', ...defaultTheme.fontFamily.serif],
+			fontFamily: ['JetBrains Mono Variable', ...defaultTheme.fontFamily.mono],
 			
 		},
 		extend: {},

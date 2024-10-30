@@ -5,6 +5,7 @@ import HeroSection from '../components/HeroSection.astro';
 import LandingHeader from '../components/LandingHeader.astro';
 //import ViewTransitions from 'astro/components/ViewTransitions.astro';
 import { supabase } from '../lib/supabase.js';
+import CocktailCard from './CocktailCard.astro';
 /*
 interface Props {
   allCocktails: any;
@@ -21,11 +22,18 @@ let { data: cocktails, error } = await supabase
 
 
 <Layout title="TaurosCocktails">
+	<link rel="stylesheet" href="">
 	<LandingHeader />
 	
 	<main>
 		<div class="flex flex-col">
 			<HeroSection />
+		</div>
+		<div class="flex flex-col">
+			<ChargeSection />
+		</div>
+		<div class="flex flex-col">
+			<CocktailCard />
 		</div>
 	</main>
 </Layout>

@@ -10,7 +10,7 @@ import { supabase } from '../lib/supabase.js';
     
     <nav>
         <ul 
-        class="flex text-sm [&>li>a]:text-current text-white border-solid border-inherit [&>li>a]:font-bold [&>li>a]:inline-block [&>li>a]:px-4 [&>li>a]:py-2"
+        class="flex text-sm font-fontFamily [&>li>a]:text-current text-orange-300 border-solid border-inherit [&>li>a]:font-bold [&>li>a]:inline-block [&>li>a]:px-4 [&>li>a]:py-2"
         >
             <li><a href="#">Cartas</a></li>
             <li><a href="#">Tragos</a></li>
@@ -19,7 +19,8 @@ import { supabase } from '../lib/supabase.js';
     </nav>
 
     <nav class="flex flex-grow basis-0 justify-end">
-        <ul class="flex text-sm [&>li>a]:text-current text-black [&>li>a]:font-bold [&>li>a]:inline-block [&>li>a]:px-4 [&>li>a]:py-2">
+        <ul class="flex text-sm font-fontFamily
+         [&>li>a]:text-current text-orange-300 [&>li>a]:font-bold [&>li>a]:inline-block [&>li>a]:px-4 [&>li>a]:py-2">
             <li><a href="#">Support</a></li>
             <li><a href="/register">Register</a></li>
             <li><a href="/signin">Login</a></li>
@@ -29,7 +30,7 @@ import { supabase } from '../lib/supabase.js';
     <div
      id="menu-backdrop"
      class={`
-        absolute bg-black/5 backdrop-blur-lg rounded
+        absolute bg-white/5 backdrop-blur-lg rounded
         translate-x-[var(--left)] translate-y-[var(--top)]
         left-0 top-0
         w-[var(--width)] h-[var(--height)]
@@ -76,6 +77,7 @@ import { supabase } from '../lib/supabase.js';
       entries.forEach(entry =>{
         const {isIntersecting} = entry
         if(isIntersecting){
+            //const color = '#FF0000'
             const color = entry.target.getAttribute('data-header-color')
             $header.style.color = color
         }
