@@ -7,9 +7,10 @@ const accessToken = cookies.get("sb-access-token");
 const refreshToken = cookies.get("sb-refresh-token");
 
 if (accessToken && refreshToken) {
-  return redirect("/dashboard");
+  return redirect("/#");
 }
 ---
+<Layout title="SignIn">
 
 <main class="min-h-screen flex flex-col items-center justify-center bg-slate-300">
   <div class="py-3 px-10 flex flex-col items-center w-full text-center">
@@ -29,3 +30,4 @@ if (accessToken && refreshToken) {
     <button type="submit" class="w-full bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600 transition">Login</button>
   </form>
 </main>
+</Layout>

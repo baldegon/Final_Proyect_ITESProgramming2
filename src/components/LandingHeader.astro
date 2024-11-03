@@ -1,7 +1,12 @@
 ---
+import { ViewTransitions } from 'astro:transitions';
 import { supabase } from '../lib/supabase.js';
 
 ---
+
+<!--Este es el header de la pagina, es un componente reutilizable que se queda
+    pegado en el top y tiene botones para moverse entre paginas
+-->
 
 <header id="landing-header" class="bg-transparent py-3 px-10 flex items-center fixed top-0 w-full justify-between z-40 text-white bg-white-/20 backdrop-blur-sm">
     <div class="flex flex-grow basis-0">
@@ -10,21 +15,27 @@ import { supabase } from '../lib/supabase.js';
     
     <nav>
         <ul 
-        class="flex text-sm font-fontFamily [&>li>a]:text-current text-orange-300 border-solid border-inherit [&>li>a]:font-bold [&>li>a]:inline-block [&>li>a]:px-4 [&>li>a]:py-2"
+        class="flex text-sm font-sans [&>li>a]:text-current text-orange-300 border-solid border-inherit [&>li>a]:font-bold [&>li>a]:inline-block [&>li>a]:px-4 [&>li>a]:py-2"
         >
             <li><a href="#">Cartas</a></li>
             <li><a href="#">Tragos</a></li>
             <li><a href="/CocktailCard">Descubrir Nuevas Combinaciones</a></li>
-            <li><a href="/TaskForm">Crear Carta</a></li>
+            <li>
+                <a href="/CocktailList">Crear Carta</a>
+                <ViewTransitions />
+            </li>
         </ul>
     </nav>
 
     <nav class="flex flex-grow basis-0 justify-end">
-        <ul class="flex text-sm font-fontFamily
+        <ul class="flex text-sm font-sans
          [&>li>a]:text-current text-orange-300 [&>li>a]:font-bold [&>li>a]:inline-block [&>li>a]:px-4 [&>li>a]:py-2">
-            <li><a href="#">Support</a></li>
+            <li><a href="/dashboard">Dashboard</a></li>
             <li><a href="/register">Register</a></li>
             <li><a href="/signin">Login</a></li>
+            <form action="/api/auth/signout">
+            <button type="submit" class="bg-red-300 text-black font-sans font-medium py-2 px-4 rounded-md hover:bg-red-600 transition-colors">Sign out</button>
+            </form>
         </ul>
     </nav>
 
@@ -40,6 +51,10 @@ import { supabase } from '../lib/supabase.js';
      `}
     >
 </header>
+
+<!--
+    Este script funciona tomando los Tags del HMLT y genera un Backdrop que simula un hover que sigue el mouse por donde se pasa 
+-->
 
 <script>
     const listItem = document.querySelectorAll("#landing-header li")
@@ -66,6 +81,12 @@ import { supabase } from '../lib/supabase.js';
     })
 </script>
 
+
+<!-- 
+    Este es el observer, lo que hace que siga el mouse
+     dependiendo de que Tag este señalando
+-->
+
 <script>
     const $header = document.querySelector('#landing-header') as HTMLElement
     const observerOptions = {
@@ -73,7 +94,7 @@ import { supabase } from '../lib/supabase.js';
         rootMargin: '0px',
         threshold: 1
     }
-
+    //Aca esta aplicando el color sobre la Tag
     const observer = new IntersectionObserver(entries =>{
       entries.forEach(entry =>{
         const {isIntersecting} = entry

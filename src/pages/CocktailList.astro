@@ -1,0 +1,228 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { supabase } from '../lib/supabase.js';
+
+// Get cocktails from Supabase
+const { data: cocktails, error } = await supabase
+  .from('cocktails')
+  .select('*')
+  .order('created_at', { ascending: false });
+---
+<section class="min-h-screen bg-[#0A0A0F] bg-cover bg-center bg-fixed relative">
+  <div class="absolute inset-0 bg-gradient-to-br from-emerald-500/10 via-red-500/10 to-cyan-500/10 pointer-events-none"></div>
+  
+  <h1 class="text-4xl font-bold py-10 text-white text-center relative">
+    <span class="bg-gradient-to-r from-red-500 via-red-400 to-orange-400 text-transparent bg-clip-text">
+      Cocktail Manager
+    </span>
+  </h1>
+  
+  <div class="container mx-auto px-4 flex flex-col md:flex-row gap-8 relative">
+    <!-- Create Cocktail Form -->
+    <div class="md:w-1/3">
+      <form id="cocktailForm" class="sticky top-4 bg-black/40 backdrop-blur-md p-6 rounded-xl border border-white/10 shadow-lg shadow-red-500/10">
+        <input 
+          type="text" 
+          id="cocktailName" 
+          placeholder="Cocktail name" 
+          class="w-full p-3 mb-4 rounded-lg bg-black/50 border border-cyan-500/20 text-white placeholder-gray-400 focus:border-red-500 focus:ring-2 focus:ring-red-500/20 transition-all"
+          required
+        />
+        <textarea 
+          id="cocktailDescription" 
+          placeholder="Cocktail description" 
+          class="w-full p-3 mb-4 rounded-lg bg-black/50 border border-cyan-500/20 text-white placeholder-gray-400 focus:border-red-500 focus:ring-2 focus:ring-red-500/20 transition-all"
+          required
+        ></textarea>
+        <textarea 
+          id="cocktailIngredients" 
+          placeholder="Ingredients (one per line)" 
+          class="w-full p-3 mb-4 rounded-lg bg-black/50 border border-cyan-500/20 text-white placeholder-gray-400 focus:border-red-500 focus:ring-2 focus:ring-red-500/20 transition-all"
+          required
+        ></textarea>
+        <textarea 
+          id="cocktailInstructions" 
+          placeholder="Instructions" 
+          class="w-full p-3 mb-4 rounded-lg bg-black/50 border border-cyan-500/20 text-white placeholder-gray-400 focus:border-red-500 focus:ring-2 focus:ring-red-500/20 transition-all"
+          required
+        ></textarea>
+        <button 
+          type="submit" 
+          class="w-full bg-gradient-to-r from-red-500 to-red-600 text-white px-4 py-3 rounded-lg hover:from-red-600 hover:to-red-700 transition-all duration-300 shadow-lg shadow-red-500/20"
+        >
+          Add Cocktail
+        </button>
+      </form>
+    </div>
+
+    <!-- Cocktail List -->
+    <div class="md:w-2/3">
+      <div class="space-y-6">
+        {cocktails?.map((cocktail) => (
+          <div class="cocktail-item bg-black/40 backdrop-blur-md p-6 rounded-xl border border-white/10 shadow-lg shadow-cyan-500/10 text-white">
+            <div class="flex justify-between">
+              <div class="flex-grow">
+                <h3 class="font-bold text-2xl mb-2 bg-gradient-to-r from-red-400 to-orange-400 text-transparent bg-clip-text">
+                  {cocktail.name}
+                </h3>
+                <p class="text-gray-300 mb-4">{cocktail.description}</p>
+                <div class="mb-4">
+                  <h4 class="font-semibold text-emerald-400">Ingredients:</h4>
+                  <pre class="text-sm text-gray-300 whitespace-pre-wrap mt-2 font-sans">{cocktail.ingredients}</pre>
+                </div>
+                <div>
+                  <h4 class="font-semibold text-emerald-400">Instructions:</h4>
+                  <p class="text-gray-300 mt-2">{cocktail.instructions}</p>
+                </div>
+              </div>
+              <div class="flex flex-col gap-3 ml-6">
+                <button 
+                  class="edit-btn bg-cyan-500 text-white px-4 py-2 rounded-lg hover:bg-cyan-600 transition-colors shadow-lg shadow-cyan-500/20"
+                  data-id={cocktail.id}
+                >
+                  Edit
+                </button>
+                <button 
+                  class="delete-btn bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600 transition-colors shadow-lg shadow-red-500/20"
+                  data-id={cocktail.id}
+                >
+                  Delete
+                </button>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  import { supabase } from '../lib/supabase.js';
+
+  // Create Cocktail
+  const cocktailForm = document.getElementById('cocktailForm');
+  cocktailForm?.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    
+    try {
+      const name = document.getElementById('cocktailName').value;
+      const description = document.getElementById('cocktailDescription').value;
+      const ingredients = document.getElementById('cocktailIngredients').value;
+      const instructions = document.getElementById('cocktailInstructions').value;
+
+      const { data, error } = await supabase
+        .from('cocktails')
+        .insert([{ 
+          name, 
+          description, 
+          ingredients,
+          instructions
+        }])
+        .select();
+
+      if (!error) {
+        window.location.reload();
+      }
+    } catch (error) {
+      console.error('Error:', error);
+      alert('Failed to create cocktail');
+    }
+  });
+
+  // Delete Cocktail
+  document.querySelectorAll('.delete-btn').forEach(button => {
+    button.addEventListener('click', async (e) => {
+      if (!confirm('Are you sure you want to delete this cocktail?')) return;
+      
+      const cocktailId = e.target.dataset.id;
+      const { error } = await supabase
+        .from('cocktails')
+        .delete()
+        .eq('id', cocktailId);
+      
+      if (!error) {
+        window.location.reload();
+      }
+    });
+  });
+
+  // Edit Cocktail
+  document.querySelectorAll('.edit-btn').forEach(button => {
+    button.addEventListener('click', async (e) => {
+      const cocktailId = e.target.dataset.id;
+      const cocktailItem = e.target.closest('.cocktail-item');
+      const name = cocktailItem.querySelector('h3').textContent;
+      const description = cocktailItem.querySelector('p').textContent;
+      const ingredients = cocktailItem.querySelector('pre').textContent;
+      const instructions = cocktailItem.querySelectorAll('p')[1].textContent;
+
+      // Replace cocktail display with edit form
+      cocktailItem.innerHTML = `
+        <form class="edit-form p-4">
+          <input 
+            type="text" 
+            class="w-full p-3 mb-4 rounded-lg bg-black/50 border border-cyan-500/20 text-white placeholder-gray-400 focus:border-red-500 focus:ring-2 focus:ring-red-500/20 transition-all" 
+            value="${name}"
+          />
+          <textarea 
+            class="w-full p-3 mb-4 rounded-lg bg-black/50 border border-cyan-500/20 text-white placeholder-gray-400 focus:border-red-500 focus:ring-2 focus:ring-red-500/20 transition-all"
+          >${description}</textarea>
+          <textarea 
+            class="w-full p-3 mb-4 rounded-lg bg-black/50 border border-cyan-500/20 text-white placeholder-gray-400 focus:border-red-500 focus:ring-2 focus:ring-red-500/20 transition-all"
+          >${ingredients}</textarea>
+          <textarea 
+            class="w-full p-3 mb-4 rounded-lg bg-black/50 border border-cyan-500/20 text-white placeholder-gray-400 focus:border-red-500 focus:ring-2 focus:ring-red-500/20 transition-all"
+          >${instructions}</textarea>
+          <div class="flex gap-3">
+            <button 
+              type="submit" 
+              class="flex-1 bg-gradient-to-r from-emerald-500 to-emerald-600 text-white px-4 py-2 rounded-lg hover:from-emerald-600 hover:to-emerald-700 transition-all duration-300 shadow-lg shadow-emerald-500/20"
+            >
+              Save
+            </button>
+            <button 
+              type="button" 
+              class="flex-1 bg-gradient-to-r from-gray-500 to-gray-600 text-white px-4 py-2 rounded-lg hover:from-gray-600 hover:to-gray-700 transition-all duration-300 shadow-lg shadow-gray-500/20 cancel-btn"
+            >
+              Cancel
+            </button>
+          </div>
+        </form>
+      `;
+
+      // Handle form submission
+      const editForm = cocktailItem.querySelector('.edit-form');
+      editForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        try {
+          const newName = editForm.querySelector('input[type="text"]').value;
+          const [newDescription, newIngredients, newInstructions] = 
+            editForm.querySelectorAll('textarea');
+
+          const { error } = await supabase
+            .from('cocktails')
+            .update({ 
+              name: newName, 
+              description: newDescription.value,
+              ingredients: newIngredients.value,
+              instructions: newInstructions.value
+            })
+            .eq('id', cocktailId);
+
+          if (!error) {
+            window.location.reload();
+          }
+        } catch (error) {
+          console.error('Error:', error);
+          alert('Failed to update cocktail');
+        }
+      });
+
+      // Handle cancel
+      editForm.querySelector('.cancel-btn').addEventListener('click', () => {
+        window.location.reload();
+      });
+    });
+  });
+</script>

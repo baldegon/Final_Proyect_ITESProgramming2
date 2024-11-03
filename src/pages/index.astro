@@ -19,12 +19,16 @@ let { data: cocktails, error } = await supabase
 
 
 ---
-
+<!-- Base de la pagina
+	Este es el Index, osea todo reside dentro de este archivo
+-->
 
 <Layout title="TaurosCocktails">
 	<link rel="stylesheet" href="">
 	<LandingHeader />
-	
+	<!--Este main contiene todo el contenedor central con los
+		componentes
+	-->
 	<main>
 		<div class="flex flex-col">
 			<HeroSection />

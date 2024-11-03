@@ -2,56 +2,81 @@
 const title = "Register";
 ---
 
-<main class="flex-1 flex flex-col gap-4 bg-slate-600 items-center p-4 justify-center">
-    <section class="w-full max-w-md">
-      <h1
-        class="font-semibold text-2xl dark:text-zinc-100 text-zinc-900 w-full mb-1"
-      >
-        {title}
-      </h1>
-      <p class="text-zinc-500 dark:text-zinc-400 text-sm mb-8 w-full">
-        Already have an account? <a
-          href="/signin"
-          class="dark:text-blue-400 text-blue-600 underline underline-offset-2 font-medium"
-          >Sign in</a
-        >
-      </p>
-      <form
-        action="/api/auth/register"
-        method="post"
-        class="grid grid-cols-1 gap-3 w-full bg-slate-600"
-      >
-        <div class="grid grid-cols-1 gap-2">
-          <label
-            for="email"
-            class="font-medium dark:text-zinc-300 text-zinc-900 text-sm"
-            >Email</label
-          >
+<main class="min-h-screen bg-[#0A0A0F] bg-cover bg-center bg-fixed relative flex items-center justify-center p-4">
+  <div class="absolute inset-0 bg-gradient-to-br from-emerald-500/10 via-red-500/10 to-cyan-500/10 pointer-events-none"></div>
+
+  <div class="w-full max-w-md relative">
+    <div class="bg-black/40 backdrop-blur-md p-8 rounded-xl border border-white/10 shadow-lg shadow-red-500/10">
+      <div class="text-center mb-8">
+        <h1 class="text-3xl font-bold mb-2">
+          <span class="bg-gradient-to-r from-red-500 via-red-400 to-orange-400 text-transparent bg-clip-text">
+            {title}
+          </span>
+        </h1>
+        <p class="text-gray-300 text-sm">
+          Already have an account? 
+          <a href="/signin" class="text-cyan-400 hover:text-cyan-300 transition-colors font-medium ml-1">
+            Sign in
+          </a>
+        </p>
+      </div>
+
+      <form action="/api/auth/register" method="post" class="space-y-6">
+        <div class="space-y-2">
+          <label for="email" class="block text-sm font-medium text-emerald-400">
+            Email
+          </label>
           <input
             id="email"
             type="email"
             name="email"
-            class="rounded-md py-1 px-3 dark:bg-zinc-800 dark:text-zinc-300 border bg-zinc-50 border-zinc-300 dark:border-zinc-700 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-600 dark:focus:bg-zinc-900 focus:bg-white focus:ring-opacity-60"
+            required
+            class="w-full p-3 rounded-lg bg-black/50 border border-cyan-500/20 text-white placeholder-gray-400 focus:border-red-500 focus:ring-2 focus:ring-red-500/20 transition-all"
+            placeholder="Enter your email"
           />
         </div>
-        <div class="grid grid-cols-1 gap-2">
-          <label
-            for="password"
-            class="font-medium dark:text-zinc-300 text-zinc-900 text-sm"
-            >Password</label
-          >
+
+        <div class="space-y-2">
+          <label for="password" class="block text-sm font-medium text-emerald-400">
+            Password
+          </label>
           <input
             id="password"
             type="password"
             name="password"
-            class="rounded-md py-1 px-3 dark:bg-zinc-800 dark:text-zinc-300 border bg-zinc-50 border-zinc-300 dark:border-zinc-700 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-600 dark:focus:bg-zinc-900 focus:bg-white focus:ring-opacity-60"
+            required
+            class="w-full p-3 rounded-lg bg-black/50 border border-cyan-500/20 text-white placeholder-gray-400 focus:border-red-500 focus:ring-2 focus:ring-red-500/20 transition-all"
+            placeholder="Create a password"
           />
         </div>
+
         <button
           type="submit"
-          class="dark:bg-zinc-100 bg-zinc-900 border-zinc-900 py-1.5 border dark:border-zinc-100 rounded-md mt-4 dark:text-zinc-900 text-zinc-100 font-medium text-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 dark:focus:ring-offset-zinc-900 disabled:opacity-50 disabled:cursor-not-allowed"
-          >Register</button
+          class="w-full bg-gradient-to-r from-red-500 to-red-600 text-white px-4 py-3 rounded-lg hover:from-red-600 hover:to-red-700 transition-all duration-300 shadow-lg shadow-red-500/20 font-medium"
         >
+          Create Account
+        </button>
       </form>
-    </section>
+
+      <div class="mt-6 text-center">
+        <p class="text-sm text-gray-400">
+          By registering, you agree to our
+          <a href="/terms" class="text-cyan-400 hover:text-cyan-300 transition-colors">Terms of Service</a>
+          and
+          <a href="/privacy" class="text-cyan-400 hover:text-cyan-300 transition-colors">Privacy Policy</a>
+        </p>
+      </div>
+    </div>
+  </div>
 </main>
+
+<style>
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  form {
+    animation: fadeIn 0.5s ease-out;
+  }
+</style>
