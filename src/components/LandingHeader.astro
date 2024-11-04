@@ -4,7 +4,8 @@ import { supabase } from '../lib/supabase.js';
 
 ---
 
-<!--Este es el header de la pagina, es un componente reutilizable que se queda
+<!--
+    Este es el header de la pagina, es un componente reutilizable que se queda
     pegado en el top y tiene botones para moverse entre paginas
 -->
 
@@ -17,9 +18,9 @@ import { supabase } from '../lib/supabase.js';
         <ul 
         class="flex text-sm font-sans [&>li>a]:text-current text-orange-300 border-solid border-inherit [&>li>a]:font-bold [&>li>a]:inline-block [&>li>a]:px-4 [&>li>a]:py-2"
         >
-            <li><a href="#">Cartas</a></li>
-            <li><a href="#">Tragos</a></li>
-            <li><a href="/CocktailCard">Descubrir Nuevas Combinaciones</a></li>
+            <li><a href="/">Cartas (Coming Soon)</a></li>
+            <li><a href="/home">Tragos</a></li>
+            <li><a href="/home">Descubrir Nuevas Combinaciones (Coming Soon)</a></li>
             <li>
                 <a href="/CocktailList">Crear Carta</a>
                 <ViewTransitions />
@@ -30,9 +31,8 @@ import { supabase } from '../lib/supabase.js';
     <nav class="flex flex-grow basis-0 justify-end">
         <ul class="flex text-sm font-sans
          [&>li>a]:text-current text-orange-300 [&>li>a]:font-bold [&>li>a]:inline-block [&>li>a]:px-4 [&>li>a]:py-2">
-            <li><a href="/dashboard">Dashboard</a></li>
             <li><a href="/register">Register</a></li>
-            <li><a href="/signin">Login</a></li>
+            <li><a href="/#">Login</a></li>
             <form action="/api/auth/signout">
             <button type="submit" class="bg-red-300 text-black font-sans font-medium py-2 px-4 rounded-md hover:bg-red-600 transition-colors">Sign out</button>
             </form>

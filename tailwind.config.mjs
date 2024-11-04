@@ -5,7 +5,10 @@ import defaultTheme from 'tailwindcss/defaultTheme'
 
 module.exports = {
 	mode: 'jit',
-	content: ['./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}'],
+	content: [
+		'./components/**/*.astro',
+		'./public/**/*',
+		'./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}'],
 	theme: {
 		fontFamily: {
 			'display': ['Arvo, Lato'],
