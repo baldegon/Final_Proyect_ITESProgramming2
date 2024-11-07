@@ -2,6 +2,7 @@
 import Layout from '../layouts/Layout.astro';
 import { supabase } from '../lib/supabase.js';
 import LandinHeader from '../components/LandingHeader.astro'
+import WhatsappButton from '../components/WhatsappButton.astro';
 
 import { checkUserSession } from './api/auth/checksession';
   
@@ -19,22 +20,30 @@ const { data: cocktails, error } = await supabase
   .order('created_at', { ascending: false });
 ---
 
-<LandinHeader />
+<div class="py-4">
+  <LandinHeader />
+</div>
 <br>
 <br>
+<br>
+
 <Layout title="CockTail List">
   
 
+
 <section class=" min-h-screen bg-[#0A0A0F] bg-cover bg-center bg-fixed relative">
+  
   <div class="absolute inset-0 bg-gradient-to-br from-emerald-500/10 via-red-500/10 to-cyan-500/10 pointer-events-none"></div>
   
+
   <h1 class="text-4xl font-bold py-10 text-white text-center relative">
     <span class="bg-gradient-to-r from-red-500 via-red-400 to-orange-400 text-transparent bg-clip-text">
       Cocktail Manager
     </span>
   </h1>
-  
   <div class="container mx-auto px-4 flex flex-col md:flex-row gap-8 relative">
+    
+    
     <!-- Create Cocktail Form -->
     <div class="md:w-1/3">
       <form id="cocktailForm" class="sticky top-4 bg-black/40 backdrop-blur-md p-6 rounded-xl border border-white/10 shadow-lg shadow-red-500/10">
@@ -109,6 +118,7 @@ const { data: cocktails, error } = await supabase
             </div>
           </div>
         ))}
+        
       </div>
     </div>
   </div>
@@ -121,6 +131,7 @@ const { data: cocktails, error } = await supabase
   import { supabase } from '../lib/supabase.js';
   
 
+  //Aca empieza el CRUD --
 
   // Create Cocktail
   const cocktailForm = document.getElementById('cocktailForm');
@@ -178,7 +189,7 @@ const { data: cocktails, error } = await supabase
       const description = cocktailItem.querySelector('p').textContent;
       const ingredients = cocktailItem.querySelector('pre').textContent;
       const instructions = cocktailItem.querySelectorAll('p')[1].textContent;
-
+      
       // Replace cocktail display with edit form
       cocktailItem.innerHTML = `
         <form class="edit-form p-4">

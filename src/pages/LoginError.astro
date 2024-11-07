@@ -1,0 +1,27 @@
+---
+const { cookies, redirect } = Astro;
+
+---
+
+
+<section>
+    <div>
+        <p>
+            Invalid Credentials Error : 500
+        </p>
+    </div>
+</section>
+
+<script>
+    let redir = Astro;
+    let delaymilis = 1000;
+
+    setTimeout(function() {
+        /*
+        Esta funcion agrega un delay
+        para que no lo rediriga instantaneamente al usuario
+        hacia la pagina de login
+        */
+       return redir.redirect("/#");
+    }, delaymilis)
+</script>
