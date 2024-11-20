@@ -1,0 +1,204 @@
+---
+import Layout from "../layouts/Layout.astro";
+
+const cocktailOfTheDay = {
+  title: "Old Fashioned",
+  description: "A sophisticated blend of bourbon, bitters, and sugar, garnished with an orange peel and cocktail cherry. This timeless cocktail represents the perfect balance of sweet, bitter, and strong.",
+  imageUrl: "https://images.unsplash.com/photo-1470337458703-46ad1756a187?w=800",
+  ingredients: [
+    "2 oz Bourbon",
+    "1 Sugar Cube",
+    "2-3 Dashes Angostura Bitters",
+    "Orange Peel",
+    "Cocktail Cherry"
+  ],
+  price: "$14",
+  preparationTime: "5 mins"
+};
+
+const cocktailOfTheDay2 = {
+  title: "Negroni",
+  description: "A Glamorous blend of Gin, Campari and Vermouth, bitters, and sugar, garnished with an orange peel and cocktail cherry",
+  imageUrl: "https://images.unsplash.com/photo-1626688445658-c948f32d68ba?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+  ingredients: [
+    "2 oz Gin",
+    "2 oz Campari Bitter",
+    "2 oz Vermouth Rosso",
+    "Orange Peel",
+  ],
+  price: "$17",
+  preparationTime: "5 mins"
+};
+
+const cocktailOfTheDay3 = {
+  title: "Old Fashioned",
+  description: "A sophisticated blend of bourbon, bitters, and sugar, garnished with an orange peel and cocktail cherry. This timeless cocktail represents the perfect balance of sweet, bitter, and strong.",
+  imageUrl: "https://images.unsplash.com/photo-1470337458703-46ad1756a187?w=800",
+  ingredients: [
+    "2 oz Bourbon",
+    "1 Sugar Cube",
+    "2-3 Dashes Angostura Bitters",
+    "Orange Peel",
+    "Cocktail Cherry"
+  ],
+  price: "$14",
+  preparationTime: "5 mins"
+};
+
+const cocktailOfTheDay4 = {
+  title: "Old Fashioned",
+  description: "A sophisticated blend of bourbon, bitters, and sugar, garnished with an orange peel and cocktail cherry. This timeless cocktail represents the perfect balance of sweet, bitter, and strong.",
+  imageUrl: "https://images.unsplash.com/photo-1470337458703-46ad1756a187?w=800",
+  ingredients: [
+    "2 oz Bourbon",
+    "1 Sugar Cube",
+    "2-3 Dashes Angostura Bitters",
+    "Orange Peel",
+    "Cocktail Cherry"
+  ],
+  price: "$14",
+  preparationTime: "5 mins"
+};
+---
+
+<Layout title="CocktailCards">
+
+<div class="w-full max-w-2xl mx-auto">
+  <div class="bg-black/40 backdrop-blur-md rounded-xl border border-white/10 shadow-lg shadow-red-500/10 overflow-hidden">
+    <div class="relative">
+      <div class="absolute inset-0 bg-gradient-to-br from-emerald-500/20 via-red-500/20 to-cyan-500/20 mix-blend-overlay"></div>
+      <img 
+        class="w-full h-64 object-cover" 
+        src={cocktailOfTheDay.imageUrl} 
+        alt="Cocktail of the Day"
+      />
+      <div class="absolute top-4 right-4 bg-red-500 text-white px-4 py-2 rounded-full text-sm font-semibold shadow-lg">
+        Featured Today
+      </div>
+    </div>
+    
+    <div class="p-6">
+      <div class="flex justify-between items-start mb-4">
+        <h3 class="text-3xl font-bold">
+          <span class="bg-gradient-to-r from-red-500 via-red-400 to-orange-400 text-transparent bg-clip-text">
+            {cocktailOfTheDay.title}
+          </span>
+        </h3>
+        <span class="text-2xl font-bold text-emerald-400">{cocktailOfTheDay.price}</span>
+      </div>
+      
+      <p class="text-gray-300 text-sm mb-6">
+        {cocktailOfTheDay.description}
+      </p>
+      
+      <div class="grid md:grid-cols-2 gap-6">
+        <div class="space-y-2">
+          <h4 class="text-emerald-400 text-sm font-medium flex items-center">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+            </svg>
+            Ingredients
+          </h4>
+          <ul class="text-gray-400 text-sm space-y-1">
+            {cocktailOfTheDay.ingredients.map((ingredient) => (
+              <li class="flex items-center">
+                <span class="w-1.5 h-1.5 rounded-full bg-cyan-400 mr-2"></span>
+                {ingredient}
+              </li>
+            ))}
+          </ul>
+        </div>
+        
+        <div class="space-y-4">
+          <div class="flex items-center text-gray-300">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 text-cyan-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+            Preparation Time: {cocktailOfTheDay.preparationTime}
+          </div>
+          
+          <button onsubmit="action" class="w-full bg-gradient-to-r from-red-500 to-red-600 text-white px-6 py-3 rounded-lg hover:from-red-600 hover:to-red-700 transition-all duration-300 shadow-lg shadow-red-500/20 font-medium">
+            Order Now
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="w-full max-w-2xl mx-auto">
+  <div class="bg-black/40 backdrop-blur-md rounded-xl border border-white/10 shadow-lg shadow-red-500/10 overflow-hidden">
+    <div class="relative">
+      <div class="absolute inset-0 bg-gradient-to-br from-emerald-500/20 via-red-500/20 to-cyan-500/20 mix-blend-overlay"></div>
+      <img 
+        class="w-full h-64 object-cover" 
+        src={cocktailOfTheDay2.imageUrl} 
+        alt="Cocktail of the Day"
+      />
+      <div class="absolute top-4 right-4 bg-red-500 text-white px-4 py-2 rounded-full text-sm font-semibold shadow-lg">
+        Featured Today
+      </div>
+    </div>
+    
+    <div class="p-6">
+      <div class="flex justify-between items-start mb-4">
+        <h3 class="text-3xl font-bold">
+          <span class="bg-gradient-to-r from-red-500 via-red-400 to-orange-400 text-transparent bg-clip-text">
+            {cocktailOfTheDay2.title}
+          </span>
+        </h3>
+        <span class="text-2xl font-bold text-emerald-400">{cocktailOfTheDay2.price}</span>
+      </div>
+      
+      <p class="text-gray-300 text-sm mb-6">
+        {cocktailOfTheDay2.description}
+      </p>
+      
+      <div class="grid md:grid-cols-2 gap-6">
+        <div class="space-y-2">
+          <h4 class="text-emerald-400 text-sm font-medium flex items-center">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+            </svg>
+            Ingredients
+          </h4>
+          <ul class="text-gray-400 text-sm space-y-1">
+            {cocktailOfTheDay2.ingredients.map((ingredient) => (
+              <li class="flex items-center">
+                <span class="w-1.5 h-1.5 rounded-full bg-cyan-400 mr-2"></span>
+                {ingredient}
+              </li>
+            ))}
+          </ul>
+        </div>
+        
+        <div class="space-y-4">
+          <div class="flex items-center text-gray-300">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 text-cyan-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+            Preparation Time: {cocktailOfTheDay2.preparationTime}
+          </div>
+          
+          <button class="w-full bg-gradient-to-r from-red-500 to-red-600 text-white px-6 py-3 rounded-lg hover:from-red-600 hover:to-red-700 transition-all duration-300 shadow-lg shadow-red-500/20 font-medium">
+            Order Now
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</Layout>
+
+
+
+<style>
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  div {
+    animation: fadeIn 0.5s ease-out;
+  }
+</style>
